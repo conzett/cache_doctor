@@ -15,10 +15,10 @@ As this only uses conditional stylesheets for hiding, do not use to redact sensi
 
 In your Gemfile:
 
-gem 'rails-cache-utils', github: 'conzett/rails-cache-utils'
+`gem 'rails-cache-utils', github: 'conzett/rails-cache-utils'`
 
 Add the javascript to your application.js file
 
-//=require rails-cache-utils
+`//=require rails-cache-utils`
 
 WIP
