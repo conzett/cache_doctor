@@ -11,7 +11,14 @@ getCookie = (name) ->
   null
 
 do ->
-  if getCookie('user_id')
+  user_id = getCookie('user_id')
+  if user_id
     $('head').append('<style> .hidden-signed-in { display: none; }</style>')
   else
     $('head').append('<style> .hidden-signed-out { display: none; }</style>')
+
+  $('.hidden-user').each ->
+    $(this).hide() if $(this).data('user-id').toString() == user_id
+
+  $('.visible-user').each ->
+    $(this).show() if $(this).data('user-id').toString() == user_id
