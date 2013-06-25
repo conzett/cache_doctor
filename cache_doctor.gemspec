@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
 
-  s.name        = 'cache-doctor'
+  s.name        = 'cache_doctor'
   s.author      = 'Graham Conzett'
   s.email       = 'conzett@gmail.com'
   s.summary     = 'TBD'

@@ -41,7 +41,7 @@ module CacheDoctor
 
   module Rails
     class Engine < ::Rails::Engine
-      initializer 'cache-doctor.use_middleware' do |app|
+      initializer 'cache_doctor.use_middleware' do |app|
         app.middleware.use CacheDoctor::Middleware
       end
     end

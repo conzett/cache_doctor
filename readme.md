@@ -31,6 +31,6 @@ that can be replaced with a custom initializer (coming soon).
 
 In your Gemfile:
 
-`gem 'cache-doctor', github: 'conzett/cache-doctor'`
+`gem 'cache_doctor', github: 'conzett/cache_doctor'`
 
 WIP
