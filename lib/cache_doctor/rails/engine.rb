@@ -8,7 +8,7 @@ module CacheDoctor
       @app = app
       @message = message
       @logger = Logger.new(STDOUT)
-      @logger.formatter = proc do |severity, datetime, progname, msg|
+      @logger.formatter = proc do |_severity, _datetime, _progname, msg|
         "[CacheDoctor] #{msg}\n"
       end
     end
@@ -22,10 +22,14 @@ module CacheDoctor
       if @headers['Content-Type'] && @headers['Content-Type'].include?('text/html')
         start = Time.now
         html = Nokogiri::HTML(@response.body)
-        if env['warden'].user
-          html.css('body .hidden-signed-in, body .visible-signed-out').remove
+        user = env['warden'].user
+        if user
+          html.css("[data-signed-in=hidden], [data-signed-out=visible],
+            [data-visible-for]:not([data-visible-for=#{user.id}],
+            [data-hidden-for=#{user.id}]").remove
         else
-          html.css('body .visible-signed-in, body .hidden-signed-out').remove
+          html.css('[data-signed-in=visible],
+            [data-signed-out=hidden],[data-visible-to]').remove
         end
         @response.body = html.to_s
         stop = Time.now

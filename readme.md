@@ -4,24 +4,27 @@
 ###Overview
 
 CacheDoctor allows you to redact small bits of HTML from your existing cache
- documents prior to sending the response, using a set list of CSS classes.
+ documents prior to sending the response, using a set list of data- attributes.
  This is performed on the server rather than with JavaScript so it is safe to
   use for removing small bits of sensitive information or more mundane things
    like sign-in links, without breaking up large existing cache fragments.
 
-The following classes are available:
-- `visible-signed-out`
-- `visible-signed-in`
-- `hidden-signed-out`
-- `hidden-signed-in`
-- `visible-user`
-- `hidden-user`
+The following attributes are available:
+- `data-signed-in="visible"`
+- `data-signed-in="hidden"`
+- `data-signed-out="visible"`
+- `data-signed-out="hidden"`
+- `data-visible-for="user_id"`
+- `data-hidden-for="user_id"`
 
-When using the `visible-user` and `hidden-user` classes you must additionally
- provide the user id in a `data-` attribute for the user:
+####Examples
 
-    <div class="hidden-user" data-user-id="<%= @post.user_id %>">
-        This content will be hidden from the poster
+    <div data-signed-in="visible">
+        This content is only visible if you are signed in
+    </div>
+
+    <div data-visible-for="<%= @post.user_id %>">
+        This content is only visible to the posts user
     </div>
 
 Currently only supports Warden based authentication solutions (like Devise) but
@@ -33,4 +36,10 @@ In your Gemfile:
 
 `gem 'cache_doctor', github: 'conzett/cache_doctor'`
 
-WIP
+###Roadmap
+
+This gem is very much a work in progress:
+
+- ~~Identity based show/hide~~
+- Specs
+- Handle flash messages
